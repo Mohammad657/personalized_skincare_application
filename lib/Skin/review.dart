@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'routine.dart'; 
-import 'skinquiz.dart'; 
+import 'package:personalized_skincare_application/project_managment.dart';
+import 'routine.dart';
+import 'skinquiz.dart';
 
 class ReviewPage extends StatefulWidget {
   final String skinType;
@@ -22,6 +23,7 @@ class ReviewPage extends StatefulWidget {
 
 class _ReviewPageState extends State<ReviewPage> {
   int _currentIndex = 0;
+  ProjectManagement projectManagement = ProjectManagement();
 
   final List<Widget> _pages = [
     SkinQuizPage(),
@@ -143,68 +145,78 @@ class _ReviewPageState extends State<ReviewPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const SkinQuizPage(),
+                          SizedBox(
+                            height: 80,
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const SkinQuizPage(),
+                                  ),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: const Color(0xFF781432),
+                                side: const BorderSide(
+                                  color: Color(0xFF781432),
+                                  width: 2,
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: const Color(0xFF781432),
-                              side: const BorderSide(
-                                color: Color(0xFF781432),
-                                width: 2,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // padding: const EdgeInsets.symmetric(
+                                //   horizontal: 20,
+                                //   vertical: 15,
+                                // ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: const Text(
+                                'Go Back to Your Quiz',
+                                style: TextStyle(fontSize: 14),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 15,
-                              ),
-                            ),
-                            child: const Text(
-                              'Go Back to Your Quiz',
-                              style: TextStyle(fontSize: 16),
                             ),
                           ),
                           const SizedBox(width: 20),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => RoutinePage(
-                                    skinType: widget.skinType,
-                                    skinConcerns: widget.skinConcerns,
-                                    skinSensitivity: widget.skinSensitivity,
-                                    routineTime: widget.routineTime,
-                                  ),
+                          SizedBox(
+                            height: 80,
+                            width: MediaQuery.sizeOf(context).width * 0.3,
+                            child: ElevatedButton(
+                              onPressed: () async {
+                                String skinType = widget.skinType;
+                                String skinConcerns = widget.skinConcerns;
+                                String skinSensitivity = widget.skinSensitivity;
+                                String routineTime = widget.routineTime;
+
+                                // تأكد من أنك تمرر context للوظيفة
+                                await projectManagement.addProject(
+                                  context, // أولًا يتم تمرير الـ context
+                                  skinType,
+                                  skinConcerns,
+                                  skinSensitivity,
+                                  routineTime,
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: const Color(0xFF610123),
+                                side: const BorderSide(
+                                  color: Color(0xFF610123),
+                                  width: 2,
                                 ),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: const Color(0xFF610123),
-                              side: const BorderSide(
-                                color: Color(0xFF610123),
-                                width: 2,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // padding: const EdgeInsets.symmetric(
+                                //   horizontal: 20,
+                                //   vertical: 15,
+                                // ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: const Text(
+                                'Continue to Your Routine',
+                                style: TextStyle(fontSize: 14),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 15,
-                              ),
-                            ),
-                            child: const Text(
-                              'Continue to Your Routine',
-                              style: TextStyle(fontSize: 16),
                             ),
                           ),
                         ],

@@ -1,4 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:personalized_skincare_application/Skin/widget/routine_time_dialog.dart';
+import 'package:personalized_skincare_application/Skin/widget/skin_concerns_dialog.dart';
+import 'package:personalized_skincare_application/Skin/widget/skin_type_dialog.dart';
+import 'package:personalized_skincare_application/project_managment.dart';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -8,16 +14,83 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
-  bool isEditing = false;
+  bool isEditingName = false;
+  bool isEditingEmail = false;
+  bool isEditingPhone = false;
+  bool isEditingAge = false;
+  bool isEditingSkinType = false;
+  bool isEditingRoutingType = false;
+  bool isEditingSkinConcerns = false;
 
   // Controllers for text fields
-  final TextEditingController nameController = TextEditingController(text: 'John Doe');
-  final TextEditingController emailController = TextEditingController(text: 'johndoe@gmail.com');
-  final TextEditingController phoneController = TextEditingController(text: '+1 (234) 567-890');
-  final TextEditingController ageController = TextEditingController(text: '29 years');
-  final TextEditingController skinTypeController = TextEditingController(text: 'Oily');
-  final TextEditingController routineTimeController = TextEditingController(text: 'Morning & Night');
+  final TextEditingController nameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController phoneController = TextEditingController();
+  final TextEditingController ageController = TextEditingController();
+  final TextEditingController skinTypeController = TextEditingController();
+  final TextEditingController routineTimeController = TextEditingController();
+  final TextEditingController skinConcernsController = TextEditingController();
 
+  @override
+  void initState() {
+    super.initState();
+    _fetchUserData(); // جلب البيانات من Firestore عند تحميل الصفحة
+  }
+
+  Future<void> _fetchUserData() async {
+    final projectManagement = ProjectManagement();
+    try {
+      // جلب البيانات من Firestore
+      Map<String, dynamic> userData =
+          await projectManagement.fetchUserDataFromFirestore();
+
+      // ملء الحقول بالبيانات
+      setState(() {
+        nameController.text = userData['username'] ?? 'John Doe';
+        emailController.text = userData['email'] ?? 'johndoe@gmail.com';
+        phoneController.text = userData['phone'] ?? '+1 (234) 567-890';
+        ageController.text = userData['age'] ?? '29 years';
+        skinTypeController.text = userData['skin_type'] ?? 'Oily';
+        routineTimeController.text =
+            userData['routinetime'] ?? 'Morning & Night';
+        skinConcernsController.text = userData['skin_concerns'] ?? 'Acne';
+      });
+    } catch (e) {
+      print("Error fetching user data: $e");
+    }
+  }
+
+  Future<void> _updateUserDataInFirestore() async {
+    try {
+      final projectManagement = ProjectManagement();
+
+      // تجميع البيانات المعدلة في خريطة
+      Map<String, dynamic> updatedData = {
+        'username': nameController.text,
+        'email': emailController.text,
+        'phone': phoneController.text,
+        'age': ageController.text,
+        'skin_type': skinTypeController.text,
+        'routinetime': routineTimeController.text,
+        'skin_concerns': skinConcernsController.text,
+      };
+
+      // إرسال البيانات إلى Firestore
+      await projectManagement.updateUserData(updatedData);
+      print('Data updated successfully!');
+    } catch (e) {
+      print("Error updating user data: $e");
+    }
+  }
+ Future<void> _signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      // الانتقال إلى صفحة تسجيل الدخول بعد تسجيل الخروج
+      Navigator.of(context).pushReplacementNamed('/signin'); // تأكد من إضافة صفحة تسجيل الدخول
+    } catch (e) {
+      print('Error signing out: $e');
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -37,7 +110,6 @@ class _ProfilePageState extends State<ProfilePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Profile Overview Section (Center aligned)
             const SizedBox(height: 10),
             Center(
               child: Container(
@@ -50,14 +122,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      isEditing ? 'Edit Your Profile' : 'Profile Overview',
-                      style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white,
-                      ),
-                    ),
                     const SizedBox(height: 5),
                     const Text(
                       'Your Skincare Journey Began on 14th January 2025',
@@ -70,50 +134,163 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
               ),
             ),
-
             const SizedBox(height: 20),
-
-            // Profile Details Section
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(20),
                 child: ListView(
                   children: [
                     _buildProfileDetail(
+                      icon: Icons.person,
+                      title: 'UserName',
+                      controller: nameController,
+                      isEditing: isEditingName,
+                      onTap: () {
+                        setState(() {
+                          isEditingName = !isEditingName;
+                          _updateUserDataInFirestore();
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 20),
+                    _buildProfileDetail(
                       icon: Icons.email,
                       title: 'Email',
                       controller: emailController,
-                      isEditing: isEditing,
+                      isEditing: isEditingEmail,
+                      onTap: () {
+                        setState(() {
+                          isEditingEmail = !isEditingEmail;
+                          _updateUserDataInFirestore();
+                        });
+                      },
                     ),
                     const SizedBox(height: 20),
                     _buildProfileDetail(
                       icon: Icons.phone,
                       title: 'Phone',
                       controller: phoneController,
-                      isEditing: isEditing,
+                      isEditing: isEditingPhone,
+                      onTap: () {
+                        setState(() {
+                          isEditingPhone = !isEditingPhone;
+                          _updateUserDataInFirestore();
+                        });
+                      },
                     ),
                     const SizedBox(height: 20),
                     _buildProfileDetail(
                       icon: Icons.calendar_today,
                       title: 'Age',
                       controller: ageController,
-                      isEditing: isEditing,
+                      isEditing: isEditingAge,
+                      onTap: () {
+                        setState(() {
+                          isEditingAge = !isEditingAge;
+                          _updateUserDataInFirestore();
+                        });
+                      },
                     ),
                     const SizedBox(height: 20),
                     _buildProfileDetail(
                       icon: Icons.water_drop,
                       title: 'Skin Type',
                       controller: skinTypeController,
-                      isEditing: isEditing,
+                      isEditing: isEditingSkinType,
+                      onTap: () {
+                        if (!isEditingSkinType) {
+                          setState(() {
+                            isEditingSkinType = true;
+                          });
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SkinTypeDialog(
+                                initialValue: skinTypeController.text,
+                                onSaved: (selectedTime) {
+                                  skinTypeController.text = selectedTime;
+                                  _updateUserDataInFirestore();
+                                },
+                                onSaveComplete: () {
+                                  setState(() {
+                                    isEditingSkinType = false;
+                                  });
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          // Optionally handle the case when already editing
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
                     _buildProfileDetail(
                       icon: Icons.timer,
                       title: 'Routine Time',
                       controller: routineTimeController,
-                      isEditing: isEditing,
+                      isEditing: isEditingRoutingType,
+                      onTap: () {
+                        if (!isEditingRoutingType) {
+                          setState(() {
+                            isEditingRoutingType = true;
+                          });
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return RoutineTimeDialog(
+                                initialValue: routineTimeController.text,
+                                onSaved: (selectedTime) {
+                                  routineTimeController.text = selectedTime;
+                                  _updateUserDataInFirestore();
+                                },
+                                onSaveComplete: () {
+                                  setState(() {
+                                    isEditingRoutingType = false;
+                                  });
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          // Optionally handle the case when already editing
+                        }
+                      },
                     ),
                     const SizedBox(height: 20),
+                    _buildProfileDetail(
+                      icon: Icons.water_drop,
+                      title: 'Skin Concerns',
+                      controller: skinConcernsController,
+                      isEditing: isEditingSkinConcerns,
+                      onTap: () {
+                        if (!isEditingSkinConcerns) {
+                          setState(() {
+                            isEditingSkinConcerns = true;
+                          });
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return SkinConcernsDialog(
+                                initialValue: skinConcernsController.text,
+                                onSaved: (selectedTime) {
+                                  skinConcernsController.text = selectedTime;
+                                  _updateUserDataInFirestore();
+                                },
+                                onSaveComplete: () {
+                                  setState(() {
+                                    isEditingSkinConcerns = false;
+                                  });
+                                },
+                              );
+                            },
+                          );
+                        } else {
+                          // Optionally handle the case when already editing
+                        }
+                      },
+                    ),
+                  const SizedBox(height: 20),
                     // Favorite Doctor Section
                     Card(
                       elevation: 5,
@@ -160,13 +337,9 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 40),
+                     const SizedBox(height: 40),
                     ElevatedButton(
-                      onPressed: () {
-                        setState(() {
-                          isEditing = !isEditing; // Toggle edit mode
-                        });
-                      },
+                      onPressed: _signOut,
                       style: ElevatedButton.styleFrom(
                         minimumSize: const Size(double.infinity, 60),
                         shape: RoundedRectangleBorder(
@@ -174,14 +347,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         ),
                         backgroundColor: const Color.fromARGB(255, 97, 1, 35),
                       ),
-                      child: Text(
-                        isEditing ? 'Save Changes' : 'Edit Profile',
-                        style: const TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: Text("Sign Out", style: TextStyle(color: Colors.white, fontSize: 20),),
                     ),
                     const SizedBox(height: 20),
                   ],
@@ -199,6 +365,7 @@ class _ProfilePageState extends State<ProfilePage> {
     required String title,
     required TextEditingController controller,
     required bool isEditing,
+    required GestureTapCallback? onTap,
   }) {
     return Card(
       elevation: 5,
@@ -250,6 +417,18 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                         ),
                 ],
+              ),
+            ),
+            InkWell(
+              onTap: onTap,
+              child: Container(
+                padding: const EdgeInsets.all(10),
+                decoration: BoxDecoration(
+                  color: const Color.fromARGB(255, 97, 1, 35),
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                child: Icon(isEditing ? Icons.check : Icons.edit,
+                    color: Colors.white),
               ),
             ),
           ],

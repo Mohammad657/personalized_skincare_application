@@ -78,55 +78,65 @@ class FinalizedRoutinePage extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.grey[700],
-                              foregroundColor: Colors.white,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                          SizedBox(
+                            height: 42,
+                            width: MediaQuery.sizeOf(context).width* 0.45,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.grey[700],
+                                foregroundColor: Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // padding: const EdgeInsets.symmetric(
+                                //   horizontal: 20,
+                                //   vertical: 15,
+                                // ),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 15,
+                              child: const Text(
+                                'Modify Routine',
+                                style: TextStyle(fontSize: 16),
                               ),
-                            ),
-                            child: const Text(
-                              'Modify Routine',
-                              style: TextStyle(fontSize: 16),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(builder: (context) => const TipsArticlesPage()),
-                              );
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.white,
-                              foregroundColor: const Color.fromARGB(255, 97, 1, 35),
-                              side: const BorderSide(
-                                color: Color.fromARGB(255, 97, 1, 35),
-                                width: 2,
+                          SizedBox(
+                                                        width: MediaQuery.sizeOf(context).width* 0.4,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(builder: (context) => const TipsArticlesPage()),
+                                );
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: const Color.fromARGB(255, 97, 1, 35),
+                                side: const BorderSide(
+                                  color: Color.fromARGB(255, 97, 1, 35),
+                                  width: 2,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                // padding: const EdgeInsets.symmetric(
+                                //   horizontal: 20,
+                                //   vertical: 15,
+                                // ),
                               ),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10),
+                              child: const Text(
+                                textAlign: TextAlign.center,
+                                'Save and Explore Tips',
+                                style: TextStyle(fontSize: 16),
                               ),
-                              padding: const EdgeInsets.symmetric(
-                                horizontal: 20,
-                                vertical: 15,
-                              ),
-                            ),
-                            child: const Text(
-                              'Save and Explore Tips',
-                              style: TextStyle(fontSize: 16),
                             ),
                           ),
+                          
                         ],
                       ),
+                      SizedBox(height:20,)
                     ],
                   ),
                 ),
