@@ -74,10 +74,10 @@ class _TipsArticlesPageState extends State<TipsArticlesPage> {
 
   String selectedCategory = "All";
   String searchText = "";
-  int _currentIndex = 0; // Adjusted to start from the "Tips" tab
+  int _currentIndex = 0; 
   final List<Widget> _pages = [
-    const TipsArticlesPage(), // Keep TipsArticlesPage here
-    const ProfilePage(), // Correctly reference ProfilePage here
+    const TipsArticlesPage(), 
+    const ProfilePage(), 
   ];
 
   @override

@@ -167,10 +167,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                // padding: const EdgeInsets.symmetric(
-                                //   horizontal: 20,
-                                //   vertical: 15,
-                                // ),
+
                               ),
                               child: const Text(
                                 'Go Back to Your Quiz',
@@ -189,9 +186,8 @@ class _ReviewPageState extends State<ReviewPage> {
                                 String skinSensitivity = widget.skinSensitivity;
                                 String routineTime = widget.routineTime;
 
-                                // تأكد من أنك تمرر context للوظيفة
                                 await projectManagement.addProject(
-                                  context, // أولًا يتم تمرير الـ context
+                                  context,
                                   skinType,
                                   skinConcerns,
                                   skinSensitivity,
@@ -208,10 +204,7 @@ class _ReviewPageState extends State<ReviewPage> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                // padding: const EdgeInsets.symmetric(
-                                //   horizontal: 20,
-                                //   vertical: 15,
-                                // ),
+
                               ),
                               child: const Text(
                                 'Continue to Your Routine',
@@ -261,7 +254,6 @@ class _ReviewPageState extends State<ReviewPage> {
     );
   }
 
-  // Helper method to build a step for each answer
   Widget _buildAnswerStep({
     required String title,
     required String description,

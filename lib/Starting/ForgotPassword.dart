@@ -8,7 +8,7 @@ class ForgotPasswordPage extends StatefulWidget {
 }
 
 class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
-  final _formKey = GlobalKey<FormState>(); // Form key to validate the form
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController _emailController = TextEditingController();
 
   @override
@@ -27,7 +27,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         backgroundColor: const Color.fromARGB(255, 97, 1, 35),
         centerTitle: true,
         iconTheme: const IconThemeData(
-          color: Colors.white, // White color for the back arrow
+          color: Colors.white, 
           size: 30,
         ),
         elevation: 5,
@@ -42,7 +42,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Form(
-            key: _formKey, // Assign the form key here
+            key: _formKey,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
@@ -59,7 +59,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 const SizedBox(height: 30),
                 TextFormField(
                   controller: _emailController,
-                  keyboardType: TextInputType.emailAddress, // Email input type for better keyboard
+                  keyboardType: TextInputType.emailAddress, 
                   decoration: InputDecoration(
                     labelText: 'Email',
                     hintText: 'Enter your email address',
@@ -78,7 +78,6 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                     if (value == null || value.isEmpty) {
                       return 'Please make sure you write your email correctly';
                     }
-                    // Improved email validation using a regex pattern
                     final emailPattern = r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                     final regExp = RegExp(emailPattern);
                     if (!regExp.hasMatch(value)) {
@@ -91,13 +90,11 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ElevatedButton(
                   onPressed: () {
                     if (_formKey.currentState?.validate() ?? false) {
-                      // Logic to send reset password email
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Password reset link sent!')),
                       );
-                      Navigator.pop(context); // Go back to SignInPage after reset
+                      Navigator.pop(context); 
                     } else {
-                      // If the form is invalid, show error
                       ScaffoldMessenger.of(context).showSnackBar(
                         const SnackBar(content: Text('Please fill in a valid email address')),
                       );

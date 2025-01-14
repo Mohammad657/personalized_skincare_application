@@ -91,10 +91,6 @@ class FinalizedRoutinePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                // padding: const EdgeInsets.symmetric(
-                                //   horizontal: 20,
-                                //   vertical: 15,
-                                // ),
                               ),
                               child: const Text(
                                 'Modify Routine',
@@ -121,10 +117,6 @@ class FinalizedRoutinePage extends StatelessWidget {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                 ),
-                                // padding: const EdgeInsets.symmetric(
-                                //   horizontal: 20,
-                                //   vertical: 15,
-                                // ),
                               ),
                               child: const Text(
                                 textAlign: TextAlign.center,
@@ -148,7 +140,6 @@ class FinalizedRoutinePage extends StatelessWidget {
     );
   }
 
-  // Helper method to create a routine step card
   Widget _buildRoutineStep(String stepTitle, String description, IconData icon) {
     return Card(
       elevation: 6,

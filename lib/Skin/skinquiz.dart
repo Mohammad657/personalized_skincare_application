@@ -22,7 +22,7 @@ class _SkinQuizPageState extends State<SkinQuizPage> {
   final List<Widget> _pages = [
     const SkinQuizPage(),
     TipsArticlesPage(),  
-    ProfilePage(),  // Updated to point to ProfilePage
+    ProfilePage(), 
   ];
 
   @override

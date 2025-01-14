@@ -47,19 +47,16 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // مراقبة حالة تسجيل الدخول للمستخدم
     return StreamBuilder<User?>(
       stream: FirebaseAuth.instance.authStateChanges(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return _loadingIndicator(); // عرض مؤشر التحميل أثناء انتظار البيانات
+          return _loadingIndicator(); 
         }
 
         if (snapshot.hasData) {
-          // إذا كان المستخدم مسجلاً دخولًا، تحقق من وجود بياناته في Firestore
           return _handleUserAuthenticated();
         } else {
-          // إذا لم يكن المستخدم مسجلاً دخولًا، اذهب إلى صفحة تسجيل الدخول
           return const Welcome();
         }
       },
@@ -83,42 +80,41 @@ class WelcomePage extends StatelessWidget {
         }
 
         if (dataSnapshot.hasData && dataSnapshot.data!) {
-          return _buildRoutinePage(context); // إذا كان لدى المستخدم بيانات
+          return _buildRoutinePage(context); 
         } else {
-          return const WelcomePage(); // إذا لم يكن لديه بيانات
+          return const WelcomePage(); 
         }
       },
     );
   }
 
   Future<bool> _checkUserDataExistence() async {
-    // التحقق من وجود بيانات للمستخدم في Firestore
     User? user = FirebaseAuth.instance.currentUser;
     if (user == null) {
-      return false; // إذا لم يكن هناك مستخدم مسجل دخوله
+      return false; 
     }
 
-    String userId = user.uid; // استخدام UID للتحقق من وجود بيانات للمستخدم
+    String userId = user.uid; 
 
     try {
-      // التحقق من وجود المشروع في Firestore للمستخدم
+     
       DocumentSnapshot projectDoc = await FirebaseFirestore.instance
           .collection('projects')
           .doc(userId)
           .get();
-      return projectDoc.exists; // إذا كانت البيانات موجودة، يرجع true
+      return projectDoc.exists; 
     } catch (e) {
       print("Error checking project data: $e");
-      return false; // في حال حدوث خطأ، يرجع false
+      return false; 
     }
   }
 
   Widget _buildRoutinePage(BuildContext context) {
     return FutureBuilder<Map<String, String>>(
-      future: _fetchUserDataFromFirestore(), // جلب البيانات من Firestore
+      future: _fetchUserDataFromFirestore(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return _loadingIndicator(); // عرض مؤشر التحميل أثناء انتظار البيانات
+          return _loadingIndicator(); 
         }
 
         if (snapshot.hasData) {
@@ -152,7 +148,6 @@ class WelcomePage extends StatelessWidget {
       String userId = user.uid;
 
       try {
-        // جلب بيانات المشروع من Firestore
         DocumentSnapshot projectDoc = await FirebaseFirestore.instance
             .collection('projects')
             .doc(userId)

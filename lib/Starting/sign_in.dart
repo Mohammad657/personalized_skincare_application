@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'about_us.dart';
 import 'ForgotPassword.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -179,7 +177,6 @@ class _SignInPageState extends State<SignInPage> {
                     alignment: Alignment.centerRight,
                     child: TextButton(
                       onPressed: () {
-                        // Navigate to ForgotPasswordPage when clicked
                         Navigator.push(
                           context,
                           MaterialPageRoute(

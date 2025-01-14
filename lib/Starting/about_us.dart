@@ -16,10 +16,10 @@ class AboutUsPage extends StatelessWidget {
             fontSize: 24,
           ),
         ),
-        backgroundColor: const Color.fromARGB(255, 97, 1, 35), // Same as Sign In/Up
+        backgroundColor: const Color.fromARGB(255, 97, 1, 35), 
         centerTitle: true,
         iconTheme: const IconThemeData(
-          color: Colors.white, // White arrow, as in Sign In
+          color: Colors.white, 
           size: 30,
         ),
         elevation: 5,
@@ -84,7 +84,6 @@ class AboutUsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                // Mission Section
                 Container(
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 97, 1, 35),
@@ -117,7 +116,6 @@ class AboutUsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                // Team Section
                 Column(
                   children: [
                     const Text(
@@ -148,7 +146,6 @@ class AboutUsPage extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 30),
-                // Contact Us Section
                 Container(
                   decoration: BoxDecoration(
                     color: const Color.fromARGB(255, 253, 240, 243),
@@ -220,7 +217,6 @@ class AboutUsPage extends StatelessWidget {
                       const SizedBox(height: 20),
                       ElevatedButton(
                         onPressed: () {
-                          // Navigate to the Skin Quiz page
                           Navigator.pushNamed(context, '/skinquiz');
                         },
                         style: ElevatedButton.styleFrom(
@@ -249,7 +245,6 @@ class AboutUsPage extends StatelessWidget {
     );
   }
 
-  // Helper method to build team member cards
   Widget _buildTeamMember(String imagePath, String name) {
     return Column(
       children: [

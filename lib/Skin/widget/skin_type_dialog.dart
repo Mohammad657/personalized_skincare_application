@@ -1,4 +1,3 @@
-// Dialog StatefulWidget
 import 'package:flutter/material.dart';
 
 class SkinTypeDialog extends StatefulWidget {

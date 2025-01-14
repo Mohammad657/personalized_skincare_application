@@ -48,8 +48,7 @@ class Welcome extends StatelessWidget {
                       Navigator.pushNamed(context, '/signup');
                     },
                     style: ElevatedButton.styleFrom(
-                      // padding: const EdgeInsets.symmetric(
-                      //     vertical: 20, horizontal: 50),
+
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -60,14 +59,14 @@ class Welcome extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.person_add, color: const Color.fromARGB(255, 250, 232, 238)), // Pink color
+                        Icon(Icons.person_add, color: const Color.fromARGB(255, 250, 232, 238)), 
                         const SizedBox(width: 10),
                         Text(
                           'Sign Up',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 250, 232, 238), // Pink color
+                            color: const Color.fromARGB(255, 250, 232, 238), 
                           ),
                         ),
                       ],
@@ -79,8 +78,7 @@ class Welcome extends StatelessWidget {
                     },
                     style: ElevatedButton.styleFrom(
                       
-                      // padding: const EdgeInsets.symmetric(
-                      //     vertical: 20, horizontal: 50),
+          
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(25),
                       ),
@@ -91,14 +89,14 @@ class Welcome extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(Icons.login, color: const Color.fromARGB(255, 250, 232, 238)), // Pink color
+                        Icon(Icons.login, color: const Color.fromARGB(255, 250, 232, 238)), 
                         const SizedBox(width: 10),
                         Text(
                           'Sign In',
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: const Color.fromARGB(255, 250, 232, 238), // Pink color
+                            color: const Color.fromARGB(255, 250, 232, 238),
                           ),
                         ),
                       ],

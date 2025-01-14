@@ -65,7 +65,7 @@ class _SignUpPageState extends State<SignUpPage> {
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  const AboutUsPage()), // Navigate to AboutUsPage after sign-up
+                  const AboutUsPage()), 
         );
       }
     } on FirebaseAuthException catch (e) {
@@ -176,7 +176,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email';
                       }
-                      // Enhanced email validation
                       final emailPattern =
                           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$';
                       final regExp = RegExp(emailPattern);
@@ -229,7 +228,6 @@ class _SignUpPageState extends State<SignUpPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your password';
                       }
-                      // Password validation: at least 8 characters, 1 uppercase, 1 lowercase, 1 digit
                       final passwordPattern =
                           r'^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$';
                       final regExp = RegExp(passwordPattern);
@@ -297,20 +295,19 @@ class _SignUpPageState extends State<SignUpPage> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
         ),
-        // Focused Border and Text Color Change
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(
               color:
-                  Color.fromARGB(255, 97, 1, 35)), // Pink Border when focused
+                  Color.fromARGB(255, 97, 1, 35)),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(20),
           borderSide: const BorderSide(
-              color: Color.fromARGB(255, 97, 1, 35)), // Pink Border when error
+              color: Color.fromARGB(255, 97, 1, 35)), 
         ),
         labelStyle: const TextStyle(
-            color: Color.fromARGB(255, 97, 1, 35)), // Pink text when focused
+            color: Color.fromARGB(255, 97, 1, 35)), 
       ),
       obscureText: isObscure,
       validator: validator,

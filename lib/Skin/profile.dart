@@ -34,17 +34,15 @@ class _ProfilePageState extends State<ProfilePage> {
   @override
   void initState() {
     super.initState();
-    _fetchUserData(); // جلب البيانات من Firestore عند تحميل الصفحة
+    _fetchUserData(); 
   }
 
   Future<void> _fetchUserData() async {
     final projectManagement = ProjectManagement();
     try {
-      // جلب البيانات من Firestore
       Map<String, dynamic> userData =
           await projectManagement.fetchUserDataFromFirestore();
 
-      // ملء الحقول بالبيانات
       setState(() {
         nameController.text = userData['username'] ?? 'John Doe';
         emailController.text = userData['email'] ?? 'johndoe@gmail.com';
@@ -64,7 +62,6 @@ class _ProfilePageState extends State<ProfilePage> {
     try {
       final projectManagement = ProjectManagement();
 
-      // تجميع البيانات المعدلة في خريطة
       Map<String, dynamic> updatedData = {
         'username': nameController.text,
         'email': emailController.text,
@@ -75,7 +72,6 @@ class _ProfilePageState extends State<ProfilePage> {
         'skin_concerns': skinConcernsController.text,
       };
 
-      // إرسال البيانات إلى Firestore
       await projectManagement.updateUserData(updatedData);
       print('Data updated successfully!');
     } catch (e) {
@@ -85,8 +81,7 @@ class _ProfilePageState extends State<ProfilePage> {
  Future<void> _signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      // الانتقال إلى صفحة تسجيل الدخول بعد تسجيل الخروج
-      Navigator.of(context).pushReplacementNamed('/signin'); // تأكد من إضافة صفحة تسجيل الدخول
+      Navigator.of(context).pushReplacementNamed('/signin');
     } catch (e) {
       print('Error signing out: $e');
     }
@@ -104,7 +99,7 @@ class _ProfilePageState extends State<ProfilePage> {
         centerTitle: true,
         iconTheme: const IconThemeData(color: Colors.white),
         elevation: 0,
-        toolbarHeight: 60, // Adjusting AppBar height
+        toolbarHeight: 60, 
       ),
       body: SafeArea(
         child: Column(
@@ -220,7 +215,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           );
                         } else {
-                          // Optionally handle the case when already editing
+                         
                         }
                       },
                     ),
@@ -253,7 +248,7 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           );
                         } else {
-                          // Optionally handle the case when already editing
+                          
                         }
                       },
                     ),
@@ -286,12 +281,11 @@ class _ProfilePageState extends State<ProfilePage> {
                             },
                           );
                         } else {
-                          // Optionally handle the case when already editing
+                         
                         }
                       },
                     ),
                   const SizedBox(height: 20),
-                    // Favorite Doctor Section
                     Card(
                       elevation: 5,
                       shape: RoundedRectangleBorder(
