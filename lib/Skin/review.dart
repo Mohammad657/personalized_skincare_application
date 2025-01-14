@@ -27,9 +27,9 @@ class _ReviewPageState extends State<ReviewPage> {
 
   final List<Widget> _pages = [
     SkinQuizPage(),
-    // Replace with your Tips page widget
+    
     Center(child: Text('Tips Page')),
-    // Replace with your Profile page widget
+    
     Center(child: Text('Profile Page')),
   ];
 
@@ -75,7 +75,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 const SizedBox(height: 20),
 
-                // Skin Type Card
+                
                 _buildAnswerStep(
                   title: 'Skin Type',
                   description: widget.skinType,
@@ -84,7 +84,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // Skin Concerns Card
+                
                 _buildAnswerStep(
                   title: 'Skin Concerns',
                   description: widget.skinConcerns,
@@ -93,7 +93,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // Skin Sensitivity Card
+                
                 _buildAnswerStep(
                   title: 'Skin Sensitivity',
                   description: widget.skinSensitivity,
@@ -102,7 +102,7 @@ class _ReviewPageState extends State<ReviewPage> {
                 ),
                 const SizedBox(height: 10),
 
-                // Routine Time Card
+                
                 _buildAnswerStep(
                   title: 'Routine Time',
                   description: widget.routineTime,

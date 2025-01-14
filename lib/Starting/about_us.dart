@@ -180,7 +180,7 @@ class AboutUsPage extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 30),
-                // Skin Quiz Start Section
+                
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,
