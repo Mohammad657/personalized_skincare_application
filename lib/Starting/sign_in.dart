@@ -146,7 +146,7 @@ class _SignInPageState extends State<SignInPage> {
                       if (value == null || value.isEmpty) {
                         return 'Please enter your email';
                       }
-                      // Email validation regex
+                      
                       String pattern =
                           r'^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$';
                       RegExp regex = RegExp(pattern);

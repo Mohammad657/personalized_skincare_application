@@ -11,7 +11,7 @@ import 'Starting/about_us.dart';
 import 'Skin/skinquiz.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Required for Firebase initialization
+  WidgetsFlutterBinding.ensureInitialized(); 
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
