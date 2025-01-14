@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "401877048978",
+    "project_id": "appt-33942",
+    "storage_bucket": "appt-33942.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:401877048978:android:8f5827af854f462f7ed04b",
+        "android_client_info": {
+          "package_name": "com.example.personalized_skincare_application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "401877048978-5u9svr9mtp1thgbgsiv8pin3fddc5qs4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC_hZRFrC1migKVl0p2POHphJHH7BtFwks"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "401877048978-5u9svr9mtp1thgbgsiv8pin3fddc5qs4.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
